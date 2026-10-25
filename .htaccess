@@ -1,0 +1,12 @@
+Options -Indexes
+
+<FilesMatch "\.(sql|md|env|ini|log|example)$">
+    Require all denied
+</FilesMatch>
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Bloquear el acceso directo a los directorios internos de la aplicación.
+    RewriteRule ^(app|config|database|views)/ - [F,L]
+</IfModule>
