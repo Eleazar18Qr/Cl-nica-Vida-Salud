@@ -15,14 +15,16 @@ class Database
 
     private function __construct()
     {
-        $host = $this->env('DB_HOST', 'localhost');
-        $port = $this->env('DB_PORT', '5432');
-        $dbname = $this->env('DB_NAME', 'bd_clinica_vida_salud');
-        $user = $this->env('DB_USER', 'postgres');
-        $password = $this->env('DB_PASSWORD', 'postgres');
+private function __construct()
+    {
+        // Credenciales directas para asegurar la conexión en la nube
+        $host = 'dpg-dbf9578ae00c73f7hing-a.virginia-postgres.render.com';
+        $port = '5432';
+        $dbname = 'bd_clinica_vida_salud';
+        $user = 'bd_clinica_vida_salud_user';
+        $password = 'EMvyKEuI2s1YCtULy1Czk6mwqgLMzVYz';
 
-        // Se agrega sslmode=require para permitir la conexión segura exigida por Render
-        $dsn = "pgsql:host={$host};port={$port};dbname={$dbname};sslmode=require;channel_binding=disable";
+        $dsn = "pgsql:host={$host};port={$port};dbname={$dbname};sslmode=require";
 
         try {
             $this->connection = new PDO($dsn, $user, $password, [
