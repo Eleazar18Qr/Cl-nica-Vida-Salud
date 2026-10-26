@@ -15,9 +15,6 @@ class Database
 
     private function __construct()
     {
-private function __construct()
-    {
-        // Credenciales directas para asegurar la conexión en la nube
         $host = 'dpg-dbf9578ae00c73f7hing-a.virginia-postgres.render.com';
         $port = '5432';
         $dbname = 'bd_clinica_vida_salud';
@@ -34,10 +31,9 @@ private function __construct()
             ]);
             $this->connection->exec("SET client_encoding TO 'UTF8'");
         } catch (PDOException $e) {
-            $hostDebug = $this->env('DB_HOST', 'NO_DEFINIDO');
             throw new RuntimeException(
-                "Error de conexión con Host [{$hostDebug}]: " . $e->getMessage(),
-                0,               
+                'No se pudo conectar a la base de datos: ' . $e->getMessage(),
+                0,
                 $e
             );
         }
@@ -55,13 +51,6 @@ private function __construct()
     public function getConnection(): PDO
     {
         return $this->connection;
-    }
-
-    private function env(string $key, string $default): string
-    {
-        $value = getenv($key);
-
-        return $value !== false && $value !== '' ? $value : $default;
     }
 
     private function __clone(): void
