@@ -15,15 +15,14 @@ class Database
 
     private function __construct()
     {
-        // La contraseña puede configurarse con la variable de entorno DB_PASSWORD.
-        // Si no está definida, se utiliza el valor por defecto 'postgres'.
         $host = $this->env('DB_HOST', 'localhost');
         $port = $this->env('DB_PORT', '5432');
         $dbname = $this->env('DB_NAME', 'bd_clinica_vida_salud');
         $user = $this->env('DB_USER', 'postgres');
         $password = $this->env('DB_PASSWORD', 'postgres');
 
-        $dsn = "pgsql:host={$host};port={$port};dbname={$dbname}";
+        // Se agrega sslmode=require para permitir la conexión segura exigida por Render
+        $dsn = "pgsql:host={$host};port={$port};dbname={$dbname};sslmode=require";
 
         try {
             $this->connection = new PDO($dsn, $user, $password, [
@@ -34,7 +33,7 @@ class Database
             $this->connection->exec("SET client_encoding TO 'UTF8'");
         } catch (PDOException $e) {
             throw new RuntimeException(
-                'No se pudo conectar a la base de datos. Verifica la configuración de PostgreSQL.',
+                'No se pudo conectar a la base de datos. Verifica la configuración de PostgreSQL: ' . $e->getMessage(),
                 0,
                 $e
             );
