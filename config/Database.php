@@ -22,7 +22,7 @@ class Database
         $password = $this->env('DB_PASSWORD', 'postgres');
 
         // Se agrega sslmode=require para permitir la conexión segura exigida por Render
-        $dsn = "pgsql:host={$host};port={$port};dbname={$dbname};sslmode=prefer";
+        $dsn = "pgsql:host={$host};port={$port};dbname={$dbname};sslmode=require";
 
         try {
             $this->connection = new PDO($dsn, $user, $password, [
