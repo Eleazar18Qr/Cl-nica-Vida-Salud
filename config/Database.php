@@ -32,9 +32,10 @@ class Database
             ]);
             $this->connection->exec("SET client_encoding TO 'UTF8'");
         } catch (PDOException $e) {
+            $hostDebug = $this->env('DB_HOST', 'NO_DEFINIDO');
             throw new RuntimeException(
-                'No se pudo conectar a la base de datos. Verifica la configuración de PostgreSQL: ' . $e->getMessage(),
-                0,
+                "Error de conexión con Host [{$hostDebug}]: " . $e->getMessage(),
+                0,               
                 $e
             );
         }
