@@ -13,6 +13,7 @@
 -- (algoritmo PASSWORD_DEFAULT / bcrypt).
 -- ============================================================
 --prueba
+--segunda prueba
 
 BEGIN;
 
