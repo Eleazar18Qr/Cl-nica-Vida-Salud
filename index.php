@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\Controllers\AuthController;
+use App\Controllers\CitaController;
 use App\Controllers\DashboardController;
 use App\Controllers\EspecialidadController;
 use App\Controllers\HorarioController;
@@ -60,6 +61,14 @@ $router->get('horarios/edit/{id}', [HorarioController::class, 'edit'], ['Adminis
 $router->post('horarios/update/{id}', [HorarioController::class, 'update'], ['Administrador']);
 $router->post('horarios/delete/{id}', [HorarioController::class, 'delete'], ['Administrador']);
 $router->post('horarios/restore/{id}', [HorarioController::class, 'restore'], ['Administrador']);
+
+// Citas
+$router->get('citas', [CitaController::class, 'index'], ['Administrador', 'Recepcionista', 'Medico', 'Paciente']);
+$router->get('citas/create', [CitaController::class, 'crear'], ['Administrador', 'Recepcionista']);
+$router->get('citas/crear', [CitaController::class, 'crear'], ['Administrador', 'Recepcionista']);
+$router->get('citas/disponibilidad', [CitaController::class, 'disponibilidad'], ['Administrador', 'Recepcionista']);
+$router->post('citas/guardar', [CitaController::class, 'guardar'], ['Administrador', 'Recepcionista']);
+$router->post('citas/cambiar-estado/{id}', [CitaController::class, 'cambiarEstado'], ['Administrador', 'Recepcionista', 'Medico']);
 
 $route = $_GET['route'] ?? '';
 $method = $_SERVER['REQUEST_METHOD'] ?? 'GET';

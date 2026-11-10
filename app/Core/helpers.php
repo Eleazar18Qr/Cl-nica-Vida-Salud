@@ -120,3 +120,30 @@ function status_badge(string $estado): string
 
     return '<span class="badge text-bg-' . $class . '">' . e($estado) . '</span>';
 }
+
+/**
+ * Badge Bootstrap para los estados de una cita.
+ * Pendiente = amarillo, Confirmada = azul, Atendida = verde,
+ * Cancelada = rojo, No_Asistio = gris.
+ */
+function cita_estado_badge(string $estado): string
+{
+    $map = [
+        'Pendiente' => ['warning', 'text-dark'],
+        'Confirmada' => ['primary', ''],
+        'Atendida' => ['success', ''],
+        'Cancelada' => ['danger', ''],
+        'No_Asistio' => ['secondary', ''],
+    ];
+
+    [$background, $extra] = $map[$estado] ?? ['light', 'text-dark'];
+    $label = $estado === 'No_Asistio' ? 'No asistió' : $estado;
+    $classes = 'badge text-bg-' . $background . ($extra !== '' ? ' ' . $extra : '');
+
+    return '<span class="' . $classes . '">' . e($label) . '</span>';
+}
+
+function cita_estado_label(string $estado): string
+{
+    return $estado === 'No_Asistio' ? 'No asistió' : $estado;
+}

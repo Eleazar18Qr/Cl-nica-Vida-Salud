@@ -30,6 +30,8 @@ $error = flash('error');
         <nav class="sidebar-nav">
             <a class="nav-link <?= is_active('dashboard') ? 'active' : '' ?>" href="<?= url('dashboard') ?>">Panel</a>
 
+            <a class="nav-link <?= is_active('citas') ? 'active' : '' ?>" href="<?= url('citas') ?>">Citas</a>
+
             <?php if (has_role(['Administrador', 'Recepcionista', 'Medico'])): ?>
                 <a class="nav-link <?= is_active('pacientes') ? 'active' : '' ?>" href="<?= url('pacientes') ?>">Pacientes</a>
             <?php endif; ?>
