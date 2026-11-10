@@ -12,6 +12,7 @@
 -- Los hashes fueron generados con password_hash() de PHP
 -- (algoritmo PASSWORD_DEFAULT / bcrypt).
 -- ============================================================
+--prueba
 
 BEGIN;
 
