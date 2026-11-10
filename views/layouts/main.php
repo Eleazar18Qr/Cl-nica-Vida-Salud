@@ -47,6 +47,10 @@ $error = flash('error');
             <?php if (has_role(['Administrador', 'Recepcionista'])): ?>
                 <a class="nav-link <?= is_active('horarios') ? 'active' : '' ?>" href="<?= url('horarios') ?>">Horarios</a>
             <?php endif; ?>
+
+            <?php if (has_role(['Administrador', 'Recepcionista'])): ?>
+                <a class="nav-link <?= is_active('reportes') ? 'active' : '' ?>" href="<?= url('reportes') ?>">Reportes</a>
+            <?php endif; ?>
         </nav>
 
         <div class="sidebar-footer">

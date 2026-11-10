@@ -9,6 +9,7 @@ use App\Controllers\EspecialidadController;
 use App\Controllers\HorarioController;
 use App\Controllers\MedicoController;
 use App\Controllers\PacienteController;
+use App\Controllers\ReporteController;
 use App\Core\Router;
 
 require __DIR__ . '/bootstrap.php';
@@ -69,6 +70,10 @@ $router->get('citas/crear', [CitaController::class, 'crear'], ['Administrador', 
 $router->get('citas/disponibilidad', [CitaController::class, 'disponibilidad'], ['Administrador', 'Recepcionista']);
 $router->post('citas/guardar', [CitaController::class, 'guardar'], ['Administrador', 'Recepcionista']);
 $router->post('citas/cambiar-estado/{id}', [CitaController::class, 'cambiarEstado'], ['Administrador', 'Recepcionista', 'Medico']);
+
+// Reportes
+$router->get('reportes', [ReporteController::class, 'index'], ['Administrador', 'Recepcionista']);
+$router->get('reportes/exportar', [ReporteController::class, 'exportarCsv'], ['Administrador', 'Recepcionista']);
 
 $route = $_GET['route'] ?? '';
 $method = $_SERVER['REQUEST_METHOD'] ?? 'GET';
